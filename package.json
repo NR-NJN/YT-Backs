@@ -1,0 +1,34 @@
+{
+  "name": "ambient-background",
+  "version": "1.0.0",
+  "description": "A relaxing ambient background app for video recording",
+  "main": "main.js",
+  "repository": "NR-NJN/YT-Backs",
+  "scripts": {
+    "start": "electron .",
+    "pack": "electron-builder --dir",
+    "dist": "electron-builder"
+  },
+  "build": {
+    "appId": "com.ambient.background",
+    "win": {
+      "target": "nsis"
+    },
+    "linux": {
+      "target": [
+        "AppImage",
+        "pacman"
+      ]
+    },
+    "mac": {
+      "target": "dmg"
+    }
+  },
+  "devDependencies": {
+    "electron": "^29.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "allowScripts": {
+    "electron@29.4.6": true
+  }
+}

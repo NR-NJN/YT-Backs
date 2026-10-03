@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ambient Background</title>
+    <style>
+        body, html {
+            margin: 0; padding: 0; width: 100%; height: 100%;
+            overflow: hidden; background: #050505; cursor: none;
+        }
+        .ambient-container {
+            width: 100vw; height: 100vh;
+            background: linear-gradient(45deg, #0a192f, #112240, #233554, #0f172a, #1e1b4b);
+            background-size: 400% 400%;
+            animation: gradientShift 12s ease infinite;
+            position: relative;
+        }
+        .orb {
+            position: absolute; border-radius: 50%; filter: blur(90px);
+            opacity: 0.4; top: 0; left: 0; 
+        }
+        
+        .orb-1 { width: 45vw; height: 45vw; background: #4facfe; }
+        .orb-2 { width: 50vw; height: 50vw; background: #00f2fe; }
+        .orb-3 { width: 40vw; height: 40vw; background: #667eea; }
+
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+    </style>
+</head>
+<body>
+    <div class="ambient-container">
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
+    </div>
+
+    <script>
+        const orbs = document.querySelectorAll('.orb');
+        
+        // Give each orb a random starting position and random speed
+        const orbData = Array.from(orbs).map(orb => {
+            return {
+                element: orb,
+                size: orb.offsetWidth,
+                x: Math.random() * window.innerWidth,
+                y: Math.random() * window.innerHeight,
+                dx: (Math.random() - 0.5) * 2.0, 
+                dy: (Math.random() - 0.5) * 2.0  
+            };
+        });
+
+        function animate() {
+            orbData.forEach(orb => {
+                orb.x += orb.dx;
+                orb.y += orb.dy;
+                const bounds = orb.size / 3;
+                
+                if (orb.x < -bounds || orb.x > window.innerWidth - (orb.size - bounds)) {
+                    orb.dx *= -1;
+                }
+                if (orb.y < -bounds || orb.y > window.innerHeight - (orb.size - bounds)) {
+                    orb.dy *= -1;
+                }
+                orb.element.style.transform = `translate3d(${orb.x}px, ${orb.y}px, 0)`;
+            });
+            
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    </script>
+</body>
+</html>
