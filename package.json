@@ -1,7 +1,8 @@
 {
   "name": "ambient-background",
   "version": "1.0.0",
-  "description": "A relaxing ambient background app for video recording",
+  "description": "A relaxing ambient background",
+  "author": "Nrnjn admin@localhost.com",
   "main": "main.js",
   "repository": "NR-NJN/YT-Backs",
   "scripts": {
